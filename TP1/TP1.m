@@ -63,14 +63,8 @@ fs = 100; %definimos la frecuencia de muestreo.
 Ts=1/fs;  %tiempo de muestreo.
 t=0:Ts:2; %variable de tiempo
 
-%Como la transformada de Fourier de un coseno es 1/2*[δ(f-f0)+δ(f+f0)],
-%hay que agregar por fuera de cada parte de mi señal que sea un coseno, un 2*
-%para corregir ese 1/2 que se "agrega" al ser transformado, y que el valor
-%de los coeficientes para cada frecuencia no sea la mitad del que debería.
-%Además es necesario agregarle multiplicando también el valor que uno quisiera
-%que tenga el coeficiente de Fourier para ese coseno.
 
-%Visto de otra forma un poco más clara, si el coseno es escrito como forma exponencial compleja:
+%Si el coseno es escrito como forma exponencial compleja:
 %cos(2*pi*f0*t) = 1/2*e^(j*2*pi*f0*t) + 1/2*e^(-j*2*pi*f0*t)
 %a simple vista se puede ver que es igual su desarrollo en serie de
 %Fourier, y que f0 y -f0 tienen los dos un coeficiente de 1/2. Si a esto se lo
