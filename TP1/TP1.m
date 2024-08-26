@@ -19,7 +19,7 @@ y2= sin(2*pi()*f2*t2); % muestreo del segundo intervalo.
 Y= [y1,y2];
 T= [t1,t2];
 
-figure;
+figure('Name','Gráfico señal Y(t)');
 stem(T,Y) %resultado del muestreo.
 xlabel('Tiempo (s)');
 ylabel('Amplitud');
@@ -39,7 +39,7 @@ t = 0:1/fs:1;         % Intervalo de tiempo.
 S = A1 * sin(2 * pi * f1 * t) + A2 * sin(2 * pi * f2 * t);
 
 % Graficamos la señal.
-figure();
+figure('Name','Suma de señales senoidales en el dominio temporal');
 plot(t, S);
 xlabel('Tiempo (s)');
 ylabel('Amplitud');
@@ -47,8 +47,7 @@ title('b) Señal definida a partir de la superposición de ondas sinusoidales.')
 grid on;
 
 hold on;
-xLimits = xlim;
-plot(xLimits, [0 0], 'k-'); 
+yline(0); 
 plot(t, S, 'r.');
 hold off;
 
@@ -56,8 +55,10 @@ hold off;
 f0=3; % frecuencia fundamental = 3Hz
 f=[-3, -2, -1, 0, 1, 2, 3]*f0; %vector de frecuencias de mi señal
 X=[0.2, 0.7, 0.5, 1, 0.5, 0.7, 0.2]; %coeficientes de la Serie de fourier correspondientes a cada frecuencia
-figure();
+figure('Name','Componentes serie de Fourier');
 stem(f,X), title('Serie de Fourier'); %graficamos la serie de fourier discreta
+xlabel('Frecuencia [Hz]')
+ylabel('Amplitud')
 
 fs = 100; %definimos la frecuencia de muestreo.
 Ts=1/fs;  %tiempo de muestreo.
@@ -80,7 +81,7 @@ x2=2*X(6)*cos(2*pi*f(6)*t); %componente con el primer armónico
 x3=2*X(7)*cos(2*pi*f(7)*t); %componente con el segundo armónico
 
 %graficamos los componentes de la señal, y se muestra la suma paso a paso
-figure();
+figure('Name','Señales en el dominio temporal de la serie de Fourier');
 subplot(3,2,1)
     plot(t,x1),title('x1');
 subplot(3,2,3)
