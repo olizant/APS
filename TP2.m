@@ -68,11 +68,8 @@ ECGmedio2 = mean(ECGnormalizado);
 
 %% Ejercicio b)
 
-ECGmedio = mean(ECGx01);
-[minA,maxA] = bounds(ECGx01);
-
 % Normalizar la señal utilizando la función normalize (Ejercicio b)
-ECGancondicionadoB = normalize(ECGx01);
+ECGancondicionadoB = normalize(ECGx01 - mean(ECGx01),'norm',inf);
 
 % Subplot 3: señal normalizada utilizando la función "normalize".
 nexttile;
