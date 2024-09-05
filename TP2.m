@@ -77,3 +77,64 @@ plot(t, ECGancondicionadoB);
 title('Señal ECG Normalizada (mediante la función "normalize")');
 xlabel('Tiempo (s)');
 ylabel('Amplitud');
+
+%% Ejercicio c)
+
+figure('Position', [400, 100, 1000, 600]);  % Para ajustar el tamaño de los graficos
+tiledlayout(2, 1, 'Padding', 'compact', 'TileSpacing', 'compact');
+
+% Defino frecuencias y vectores tiempo
+fs1 = 500;
+fs2 = 1000;
+t1 = 0:1/fs1:0.1;
+t2 = 0:1/fs2:0.1;
+
+% frecuencias y amplitudes
+f1 = 25;
+f2 = 75;
+A1 = 10;
+A2 = 4;
+
+% Defino funcion
+y = @(t,f,A)  A*sin(2*pi()*f*t);    % Funcion sinusoidal
+
+% Muestreo a 500Hz
+nexttile;
+stem(t1,y(t1,f1,A1)+y(t1,f2,A2));
+xlabel('Tiempo (s)');
+ylabel('Amplitud');
+title('Suma de sinusoides con frecuencia de muestreo igual a 500Hz');
+
+
+% Muestreo a 1000Hz
+nexttile;
+stem(t2,y(t2,f1,A1)+y(t2,f2,A2));
+xlabel('Tiempo (s)');
+ylabel('Amplitud');
+title('Suma de sinusoides con frecuencia de muestreo igual a 1000Hz');
+
+%Los dos algoritmos utilizados a continuacion calculan valores rms, elija uno a utilizar
+
+%Si la frecuencia de muestreo es mayor, el valor de la funcion rms() se
+%acerca mas al valor calculado con el metodo de trapecios, esto seguro se
+%debe a que la funcion rms() emplea el metodo de rieman a la hora de
+%intregrar
+
+% t2=0:1/100000:0.1;      % prueba de que a mayor frec. de muestreo mas se acercan los valores
+
+Y = y(t2,f1,A1)+y(t2,f2,A2);
+paso = (t2(end)-t2(1))/length(t2);
+
+Vrms1 = sqrt(1/(t2(end-t2(1)))*sum(paso*(Y.^2)));    %Calcula rms usando metodo de Rieman
+Vrms1 = sqrt(1/(t2(end))*trapz(t2,(Y.^2)));    %Calcula rms usando metodo de trapecios
+
+Vrms2 = rms(Y);
+
+% Imprimo en pantalla
+x = ['El valor RMS calculado empleando un algoritmo propio fue de (',num2str(Vrms1),') y usando la funcion rms() de matlab (',num2str(Vrms2),')'];
+disp(x)
+
+
+
+
+
